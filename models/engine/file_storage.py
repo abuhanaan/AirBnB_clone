@@ -22,16 +22,17 @@ class FileStorage():
 
     def save(self):
         """serializes __objects to the JSON file (path: __file_path)"""
-        with open(FileStorage.__file_path, 'w') as fl:
+        with open(FileStorage.__file_path, 'w', encoding="utf_8") as fl:
             my_dictionary = {k:v.to_dict() for k, v in FileStorage.__objects.items()}
             json.dump(my_dictionary, fl)
 
     def reload(self):
         """deserializes json files to objects"""
         if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.file_path, 'r') as j_file:
+            with open(FileStorage.__file_path, 'r', encoding="utf_8") as j_file:
                 object_dict = json.load(f_file)
-                BaseModel(**v for k, v in object_dict.items())#is this correct????????????
 
-        
+                for key in object_dict.keys():
+                    my_class = object_dict[key]["__class__"]
+                    FileStorage.__objects[key] = eval(my_class)(**object_dict[key])      
 
