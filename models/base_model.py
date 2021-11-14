@@ -2,7 +2,7 @@
 """base class module containing the Base model class"""
 import uuid
 from datetime import datetime
-from models import storage
+import models 
 
 class BaseModel:
     """class defining common attributes and methods for other classes"""

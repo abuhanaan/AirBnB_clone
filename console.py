@@ -2,93 +2,18 @@
 """module for the entry point of my cmd interpreter"""
 
 import cmd
-<<<<<<< HEAD
+import models
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
 from models.amenity import Amenity
+from models.city import City
 from models.place import Place
 from models.review import Review
+from models.state import State
+from models.user import User
 class HBNBCommand(cmd.Cmd):
     """class for cmd interpreter"""
     prompt = "(hbnb)"
     class_list = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
-=======
-from shlex import split
-
-from models.base_model import BaseModel
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
-
-
-def check_args(args):
-    """checks if args is valid
-    Args:
-        args (str): the string containing the arguments passed to a command
-    Returns:
-        Error message if args is None or not a valid class, else the arguments
-    """
-    arg_list = split(args)
-
-    if len(arg_list) == 0:
-        print("** class name missing **")
-    elif arg_list[0] not in CLASSES:
-        print("** class doesn't exist **")
-    else:
-        return arg_list
-
-class HBNBCommand(cmd.Cmd):
-    """class for cmd interpreter"""
-    prompt = "(hbnb)"
-    __classes = {
-                "BaseMode",
-                "Amenity",
-                "City",
-                "Place",
-                "Review",
-                "State",
-                "User"
-    }
-
-    def emptyline(self):
-        "The interpreter does nothing when it gets an empty line"
-        pass
-
-    def default(self, args):
-        pass
-
-    def do_create(self, arg):
-        """
-        Creates a new instance of the base model,
-        saves it to JSON file,
-        then prints its id.
-        """
-        argl = parse(arg)
-        if len(argl) == 0:
-            print("** class name missing **")
-        elif argl[0] not in HBNBCommand.__classes:
-            print("** class doesn't exist **")
-        else:
-            print(eval(argl[0])().id)
-            storage.save()
-
-    def do_show(self, argv):
-        pass
-
-    def do_destroy(self, argv):
-        pass
-
-    def do_all(self, argv):
-        pass
-
-    def do_update(self, argv):
-        pass
->>>>>>> d2207433ceec622b21b04e06da5d8b55c3e0f77f
 
     def do_EOF(self, line):
         """End of file"""
@@ -156,12 +81,12 @@ class HBNBCommand(cmd.Cmd):
                     print("** class dosen't exist **")
                 else:
                     my_key = ("{}.{]".format(Args[0], Args[1]))
-                    if my_key not in storage.all():
+                    if my_key not in models.storage.all():
                         print("** no instance found **")
                     else:
-                        del storage.all()[key]
-                        storage.save()
-                        storage.reload()
+                        del models.storage.all()[key]
+                        models.storage.save()
+                        models.storage.reload()
 
     def do_all(self, line):
             """Prints all string representation of all instances
@@ -189,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
         Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
         Usage: update <class name> <id> <attribute name> "<attribute value>"""
         Args = line.split()
-        my_dict = model.storage.all()
+        my_dict = models.storage.all()
         if len(line) <= 0:
             print("** class name missing **")
         else:
