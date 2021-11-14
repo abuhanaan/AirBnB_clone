@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
             Args = line.split()
             my_dict = models.storage.all()
             my_list = []
-            if Args[0] == None or Args[0] == "":
+            if len(line) ==  0:
                 for key in my_dict.keys():
                     my_list.append(str(my_dict[key]))
                 print(my_list)
