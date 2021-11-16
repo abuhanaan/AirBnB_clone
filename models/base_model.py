@@ -7,17 +7,18 @@ import models
 
 class BaseModel:
     """class defining common attributes and methods for other classes"""
-    
 
     def __init__(self, *args, **kwargs):
         """base instance initialization"""
 
-        if kwargs != None and kwargs != {}:
+        if kwargs is not None and kwargs != {}:
             for key in kwargs.keys():
                 if key == "created_at":
-                    self.__dict__["created_at"] = datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__["created_at"] = datetime.strptime\
+                            (kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "updated_at":
-                    self.__dict__["updated_at"] = datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                    self.__dict__["updated_at"] = datetime.strptime\
+                        (kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                     if key != "__class__":
                         self.__dict__[key] = kwargs[key]
@@ -27,12 +28,11 @@ class BaseModel:
             self.updated_at = datetime.now()
             models.storage.new(self)
 
-
     def __str__(self):
         """method returning string representation of an instance"""
 
-
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format\
+                (type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """method updating updated_at attribute with the current date"""
@@ -41,7 +41,7 @@ class BaseModel:
 
     def to_dict(self):
         """return object's dictionary representation"""
-        
+
         obj_dict = self.__dict__.copy()
         obj_dict["__class__"] = type(self).__name__
         obj_dict["created_at"] = obj_dict["created_at"].isoformat()
