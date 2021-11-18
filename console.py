@@ -75,12 +75,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             if len(Args) == 1:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     print("** instance id missing **")
             else:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     try:
                         my_key = ("{}.{}".format(Args[0], Args[1]))
