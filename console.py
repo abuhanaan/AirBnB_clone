@@ -51,12 +51,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             if len(Args) == 1:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     print("** instance id missing **")
             else:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     try:                 
                         my_key = ("{}.{}".format(Args[0], Args[1]))
@@ -75,12 +75,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             if len(Args) == 1:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     print("** instance id missing **")
             else:
                 if Args[0] not in self.class_list:
-                    print("** class dosen't exist **")
+                    print("** class doesn't exist **")
                 else:
                     try:
                         my_key = ("{}.{}".format(Args[0], Args[1]))
@@ -132,26 +132,36 @@ class HBNBCommand(cmd.Cmd):
                     if Args[0]+"."+Args[1] not in my_dict.keys():
                         print("** no instance found **")
                     else:
-                        if Args[2] == None or Args[2] == "":
-                            print("** attribute name missing **")
+                        print("** attribute name missing **")
+            elif len(Args) == 3:
+                if Args[0] not in self.class_list:
+                    print("** class doesn't exist **")
+                else:
+                    if Args[0]+"."+Args[1] not in my_dict.keys():
+                        print("** no instance found **")
+                    else:
+                        print("** value missing **")
+            else:
+                if Args[0] not in self.class_list:
+                    print("** class doesn't exist **")
+                else:
+                    if Args[0]+"."+Args[1] not in my_dict.keys():
+                        print("** no instance found **")
+                    else:
+                        my_instance = Args[0]
+                        _id = Args[1]
+                        attr_name = Args[2]
+                        attr_value = Args[3][1:-1]
+                        key = my_instance+"."+_id
+                        if hasattr(eval(my_instance), attr_name):
+                            my_attr = getattr(eval(my_instance), attr_name)
+                            my_type = eval(type(my_attr).__name__)
+                            if my_type == int:
+                                attr_value = int(float(attr_value))
+                                setattr(my_dict[key], attr_name, my_type(attr_value))
                         else:
-                            if Args[3] == None or Args[3] == "":
-                                print("** value missing **")
-                            else:
-                                my_instance = Args[0]
-                                _id = Args[1]
-                                attr_name = Args[2]
-                                attr_value =Args[3]
-                                if hasattr(eval(my_instance, attr_name)):
-                                    my_attr = getattr(eval(my_instance, attr_name))
-                                    my_type = eval(type(my_attr).__name__)
-                                    if my_type == int:
-                                        attr_value = int(float(attr_value))
-                                    key = my_instance+"."+_id
-                                    setattr(my_dict[key], attr_name, my_type(attr_value))
-                                else:
-                                    key = my_instance+"."+_id
-                                    setattr(my_dict[key], attr_name, attr_value)
+                            setattr(my_dict[key], attr_name, attr_value)
+                        my_dict[key].save()
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
