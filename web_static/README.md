@@ -11,3 +11,7 @@
 - [CSS](https://alx-intranet.hbtn.io/rltoken/okP4V3RxFXHkEcQo19AnuQ)
 - [MDN](https://alx-intranet.hbtn.io/rltoken/BpSXtcWOGH0UT4XLCoQyJg)
 - [center boxes](https://alx-intranet.hbtn.io/rltoken/Tlje4XYwyZbUfHkQWGi1WQ)
+- [Flexible Boxes](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox)
+- [Flexbox Froggy](http://flexboxfroggy.com/)
+- [Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+
