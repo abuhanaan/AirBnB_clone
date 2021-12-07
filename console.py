@@ -15,7 +15,8 @@ from models.user import User
 class HBNBCommand(cmd.Cmd):
     """class for cmd interpreter"""
     prompt = "(hbnb)"
-    class_list = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    class_list = \
+        ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_EOF(self, line):
         """End of file"""
@@ -58,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
                 if Args[0] not in self.class_list:
                     print("** class doesn't exist **")
                 else:
-                    try:                 
+                    try:
                         my_key = ("{}.{}".format(Args[0], Args[1]))
                         print(models.storage.all()[my_key])
                     except:
@@ -97,7 +98,7 @@ class HBNBCommand(cmd.Cmd):
             Args = line.split()
             my_dict = models.storage.all()
             my_list = []
-            if len(line) ==  0:
+            if len(line) == 0:
                 for key in my_dict.keys():
                     my_list.append(str(my_dict[key]))
                 print(my_list)
@@ -158,7 +159,8 @@ class HBNBCommand(cmd.Cmd):
                             my_type = eval(type(my_attr).__name__)
                             if my_type == int:
                                 attr_value = int(float(attr_value))
-                                setattr(my_dict[key], attr_name, my_type(attr_value))
+                                setattr(my_dict[key], attr_name, my_type(
+                                    attr_value))
                         else:
                             setattr(my_dict[key], attr_name, attr_value)
                         my_dict[key].save()
